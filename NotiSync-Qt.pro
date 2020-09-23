@@ -12,11 +12,17 @@ SOURCES += \
     loginview.cpp \
     main.cpp \
     mainview.cpp \
+    mainviewphonedetails.cpp \
+    mainviewphonemessages.cpp \
+    mainviewphonenotifications.cpp \
     widget.cpp
 
 HEADERS += \
     loginview.h \
     mainview.h \
+    mainviewphonedetails.h \
+    mainviewphonemessages.h \
+    mainviewphonenotifications.h \
     widget.h
 
 FORMS += \
