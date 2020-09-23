@@ -11,10 +11,12 @@ CONFIG += c++11
 SOURCES += \
     loginview.cpp \
     main.cpp \
+    mainview.cpp \
     widget.cpp
 
 HEADERS += \
     loginview.h \
+    mainview.h \
     widget.h
 
 FORMS += \
@@ -25,5 +27,7 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+RESOURCES += \
+    icons.qrc
 
 DISTFILES +=

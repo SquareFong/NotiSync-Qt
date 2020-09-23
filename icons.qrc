@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/Icons">
+        <file alias="notification">icons/bell.png</file>
+        <file alias="phone call">icons/phone.png</file>
+        <file alias="messages">icons/sms.png</file>
+        <file alias="smartphone">icons/smartphone.png</file>
+    </qresource>
+</RCC>
