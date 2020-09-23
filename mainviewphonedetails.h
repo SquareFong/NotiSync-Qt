@@ -5,10 +5,6 @@
 #include <QLabel>
 #include <QGridLayout>
 
-namespace Ui {
-class PhoneDetails;
-}
-
 class PhoneDetails : public QWidget
 {
     Q_OBJECT
@@ -26,7 +22,6 @@ signals:
     void display(int number);
 
 private:
-    Ui::PhoneDetails *ui;
     QLabel *subTitle;
     QLabel *phoneName;
     QLabel *phoneProcessor;

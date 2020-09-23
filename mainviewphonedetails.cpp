@@ -1,13 +1,10 @@
 #include "mainviewphonedetails.h"
-#include "ui_mainviewphonedetails.h"
 #include <QDebug>
 #include <QSpacerItem>
 
 PhoneDetails::PhoneDetails(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::PhoneDetails)
+    QWidget(parent)
 {
-    ui->setupUi(this);
     subTitle = new QLabel("Phone Details");
     QFont f("Noto Mono");
     f.setBold(true);
@@ -45,5 +42,4 @@ PhoneDetails::PhoneDetails(QWidget *parent) :
 
 PhoneDetails::~PhoneDetails()
 {
-    delete ui;
 }
