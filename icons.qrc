@@ -4,5 +4,6 @@
         <file alias="phone call">icons/phone.png</file>
         <file alias="messages">icons/sms.png</file>
         <file alias="smartphone">icons/smartphone.png</file>
+        <file alias="defaultAppLogo">icons/androidlogo.png</file>
     </qresource>
 </RCC>

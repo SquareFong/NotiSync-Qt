@@ -1,4 +1,5 @@
 #include "mainviewphonenotifications.h"
+
 #include <QPushButton>
 #include <QListWidgetItem>
 
@@ -13,18 +14,32 @@ PhoneNotifications::PhoneNotifications(QWidget *parent) :
     connect(buttonCLear, &QPushButton::released, this, &PhoneNotifications::clear);
     header->addWidget(buttonCLear);
 
-    //通知列表
-    notificationList = new QListWidget();
-    //notificationList->setFlow(QListView::LeftToRight);
-    //notificationList->setProperty("isWrapping", QVariant(true));
-    notificationList->setWordWrap(true);
-    notificationList->setTextElideMode(Qt::ElideLeft);
-    /**测试信息**/
-    QListWidgetItem *item = new QListWidgetItem(QIcon(":/Icons/phone call"), QString("text"), notificationList);
-    //item->setTextAlignment()
-    notificationList->addItem("这是一条中文测试，测试自动换行是否有效。。。。。");
-    notificationList->addItem("test2:34567865433466543456787654346787654456");
-    notificationList->addItem("test3:ghuikmmjuygvgkmvgbvghmbghunbvghjabsdhjfnbhjakwmenfj");
+    notificationList = new QListView();
+    pModel = new QStandardItemModel();
+
+    NotificationItemData itemdata{":/Icons/defaultAppLogo",
+                                  "test APP",
+                                  "test Content:这是一条中文测试，测试自动换行是否有效。。。。。长度不够，凑个数"};
+
+    QStandardItem *pItem = new QStandardItem;
+    pItem->setEditable(false);
+    pItem->setData(QVariant::fromValue(itemdata), Qt::UserRole + 1);
+
+    pModel->appendRow(pItem);
+
+    NotificationItemDelegate *pItemDelegate = new NotificationItemDelegate();
+    notificationList->setItemDelegate(pItemDelegate);
+    notificationList->setModel(pModel);
+
+//    //通知列表
+//    notificationList = new QListWidget();
+//    notificationList->setTextElideMode(Qt::ElideLeft);
+//    /**测试信息**/
+//    QListWidgetItem *item = new QListWidgetItem(QIcon(":/Icons/phone call"), QString("text"), notificationList);
+//    //item->setTextAlignment()
+//    notificationList->addItem("这是一条中文测试，测试自动换行是否有效。。。。。");
+//    notificationList->addItem("test2:34567865433466543456787654346787654456");
+//    notificationList->addItem("test3:ghuikmmjuygvgkmvgbvghmbghunbvghjabsdhjfnbhjakwmenfj");
 
     //设置主页面
     mainLayout = new QVBoxLayout();

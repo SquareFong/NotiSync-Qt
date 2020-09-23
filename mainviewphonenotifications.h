@@ -6,6 +6,9 @@
 #include <QHBoxLayout>
 #include <QListWidget>
 #include <QLabel>
+#include <QStandardItem>
+
+#include "notificationitemdelegate.h"
 
 class PhoneNotifications : public QWidget
 {
@@ -18,7 +21,8 @@ public:
 public slots:
     //清空消息列表
     void clear(){
-        notificationList->clear();
+        //notificationList->clear();
+        pModel->clear();
     }
 
 signals:
@@ -26,7 +30,8 @@ signals:
 private:
     QHBoxLayout *header;
     QVBoxLayout *mainLayout;
-    QListWidget *notificationList;
+    QListView *notificationList;
+    QStandardItemModel *pModel;
 };
 
 #endif // MAINVIEWPHONENOTIFICATIONS_H
