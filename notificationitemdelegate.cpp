@@ -34,6 +34,7 @@ void NotificationItemDelegate::paint(QPainter *painter,
                             rect.height() - marginValue * 2,
                             8, 8);
         // 鼠标悬停或者选中时改变背景色
+        painter->setPen(QColor(0,0,0,0));
         if (option.state.testFlag(QStyle::State_MouseOver)) {
             painter->setBrush(QColor("#ebeced"));
         }else {
@@ -44,7 +45,7 @@ void NotificationItemDelegate::paint(QPainter *painter,
         // 绘制应用图标、标题、内容的区域
         //int marginValue = 5;
         QRectF iconRect = QRect(rect.left()+marginValue * 2, rect.top()+marginValue * 2,
-                                36, 36);
+                                30, 30);
         QRectF titleRect = QRect(iconRect.right()+marginValue, iconRect.top(),
                                  rect.width()-10-iconRect.width(), 20);
         QRectF contentRect = QRectF(titleRect.left(), titleRect.bottom()+marginValue,
