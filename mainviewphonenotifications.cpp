@@ -17,6 +17,7 @@ PhoneNotifications::PhoneNotifications(QWidget *parent) :
     notificationList = new QListView();
     pModel = new QStandardItemModel();
 
+    //插入测试数据
     NotificationItemData itemdata{":/Icons/defaultAppLogo",
                                   "test APP",
                                   "test Content:这是一条中文测试，测试自动换行是否有效。。。。。长度不够，凑个数"};
@@ -25,8 +26,8 @@ PhoneNotifications::PhoneNotifications(QWidget *parent) :
     pItem->setEditable(false);
     pItem->setData(QVariant::fromValue(itemdata), Qt::UserRole + 1);
 
-    pModel->appendRow(pItem);
 
+    pModel->appendRow(pItem);
     NotificationItemDelegate *pItemDelegate = new NotificationItemDelegate();
     notificationList->setItemDelegate(pItemDelegate);
     notificationList->setModel(pModel);

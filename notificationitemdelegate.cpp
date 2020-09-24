@@ -65,6 +65,8 @@ void NotificationItemDelegate::paint(QPainter *painter,
         painter->setPen(QPen(Qt::gray));
         painter->setFont(QFont("Noto Mono", 15));
         painter->drawText(contentRect, content);
+
+        painter->restore();
     }
 }
 
