@@ -31,13 +31,9 @@ PhoneDetails::PhoneDetails(QWidget *parent) :
     mainLayout->addWidget(phoneResolution, 6, 0);mainLayout->addWidget(new QLabel(QString("2220 x 1080")), 6, 1);
     mainLayout->addWidget(phoneRamUsage, 7, 0);mainLayout->addWidget(new QLabel(QString("2879 MiB / 3592 MiB")), 7, 1);
     mainLayout->addWidget(phoneStorageUsage, 8, 0);mainLayout->addWidget(new QLabel(QString("39.83GB / 64.00GB")), 8, 1);
-    //mainLayout->addWidget(new QLabel(""), 8, 2);
-
-
 
     setLayout(mainLayout);
     qDebug() << geometry().x() << geometry().y() << width() << ' ' << height();
-    //label->show();
 }
 
 PhoneDetails::~PhoneDetails()

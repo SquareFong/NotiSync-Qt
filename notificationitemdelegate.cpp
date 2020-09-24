@@ -43,7 +43,6 @@ void NotificationItemDelegate::paint(QPainter *painter,
         painter->drawPath(path);
 
         // 绘制应用图标、标题、内容的区域
-        //int marginValue = 5;
         QRectF iconRect = QRect(rect.left()+marginValue * 2, rect.top()+marginValue * 2,
                                 30, 30);
         QRectF titleRect = QRect(iconRect.right()+marginValue, iconRect.top(),
