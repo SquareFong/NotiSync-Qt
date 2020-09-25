@@ -12,7 +12,7 @@
 #include <QStackedLayout>
 #include <ctime>
 
-#include "notificationitemdelegate.h"
+#include "messagesitemdelegate.h"
 
 namespace Ui {
 class PhoneMessages;

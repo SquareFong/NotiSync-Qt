@@ -19,8 +19,19 @@ PhoneMessages::PhoneMessages(QWidget *parent) :
     messagesList = new QListView();
     pMessageListModel = new QStandardItemModel();
 
-    //暂时借用Notification的delagate。
-    NotificationItemDelegate *pItemDelegate = new NotificationItemDelegate();
+    MessagesItemDelegate *pItemDelegate = new MessagesItemDelegate();
+    //插入测试数据
+    MessagesItemData itemData{
+        ":/Icons/defaultAppLogo",
+        "test Contact",
+        "10086",
+        "一条测试信息，看看这玩意能显示多长的文本，啦啦啦啦啦啦啦啦啦",
+        "等一个星期三"
+    };
+    QStandardItem *pItem = new QStandardItem;
+    pItem->setEditable(false);
+    pItem->setData(QVariant::fromValue(itemData), Qt::UserRole + 1);
+    pMessageListModel->appendRow(pItem);
 
     messagesList->setItemDelegate(pItemDelegate);
     messagesList->setModel(pMessageListModel);
