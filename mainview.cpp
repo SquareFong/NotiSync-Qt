@@ -31,7 +31,7 @@ MainView::MainView(int width, int height, QWidget *parent) :
     connect(listWidget, &QListWidget::itemClicked, this, &MainView::listWidgetClicked);
     // 详情
     myQListWidgetItem *phoneDetailButton = new myQListWidgetItem();
-    phoneDetailButton->setText("About Your Phone");
+    phoneDetailButton->setText("Detail");
     phoneDetailButton->setIcon(QIcon(":/Icons/smartphone"));
     phoneDetailButton->setTextAlignment(Qt::AlignLeft);
     phoneDetailButton->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
@@ -54,8 +54,8 @@ MainView::MainView(int width, int height, QWidget *parent) :
     listWidget->addItem(smsButton);
 
     listWidget->setCurrentRow(0);
-    QVBoxLayout *leftLayout = new QVBoxLayout();
-    leftLayout->addWidget(listWidget);
+    //QVBoxLayout *leftLayout = new QVBoxLayout();
+    //leftLayout->addWidget(listWidget);
 
     //主界面右边部分
     stackLayout = new QStackedLayout();
@@ -71,12 +71,12 @@ MainView::MainView(int width, int height, QWidget *parent) :
 
     //设置主页面
     mainLayout = new QHBoxLayout();
-    mainLayout->setGeometry(QRect(width/4, 0, width*3/4, height-20));
 
-    mainLayout->addLayout(leftLayout);
+    mainLayout->addWidget(listWidget);
     mainLayout->addLayout(stackLayout);
 
-    mainLayout->setStretch(1, 3);
+    mainLayout->setStretchFactor(listWidget, 1);
+    mainLayout->setStretchFactor(stackLayout,4);
     setLayout(mainLayout);
 
 }

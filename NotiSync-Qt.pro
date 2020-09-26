@@ -15,6 +15,7 @@ SOURCES += \
     mainviewphonedetails.cpp \
     mainviewphonemessages.cpp \
     mainviewphonenotifications.cpp \
+    messagesitemdelegate.cpp \
     notificationitemdelegate.cpp \
     widget.cpp
 
@@ -24,6 +25,7 @@ HEADERS += \
     mainviewphonedetails.h \
     mainviewphonemessages.h \
     mainviewphonenotifications.h \
+    messagesitemdelegate.h \
     notificationitemdelegate.h \
     widget.h
 

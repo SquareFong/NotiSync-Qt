@@ -4,15 +4,16 @@
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
 {
+
     //ui->setupUi(this);
-    resize(800, 600);
+    resize(900, 600);
     stackLayout = new QStackedLayout;
 
-    loginView = new LoginView(800, 600);
+    loginView = new LoginView(width(), height());
     stackLayout->addWidget(loginView);
     connect(loginView, &LoginView::display, stackLayout, &QStackedLayout::setCurrentIndex);
 
-    mainView = new MainView(800, 600);
+    mainView = new MainView(width(), height());
     stackLayout->addWidget(mainView);
     connect(mainView, &MainView::display, stackLayout, &QStackedLayout::setCurrentIndex);
 
