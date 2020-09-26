@@ -6,7 +6,7 @@ Widget::Widget(QWidget *parent)
 {
 
     //ui->setupUi(this);
-    resize(900, 600);
+    resize(1100, 600);
     stackLayout = new QStackedLayout;
 
     loginView = new LoginView(width(), height());
