@@ -16,6 +16,9 @@ SOURCES += \
     mainviewphonemessages.cpp \
     mainviewphonemessageschat.cpp \
     mainviewphonenotifications.cpp \
+    messagechatcontentdelegate.cpp \
+    messagechatcontentmodel.cpp \
+    messagechatcontentview.cpp \
     messagesitemdelegate.cpp \
     notificationitemdelegate.cpp \
     widget.cpp
@@ -27,6 +30,9 @@ HEADERS += \
     mainviewphonemessages.h \
     mainviewphonemessageschat.h \
     mainviewphonenotifications.h \
+    messagechatcontentdelegate.h \
+    messagechatcontentmodel.h \
+    messagechatcontentview.h \
     messagesitemdelegate.h \
     notificationitemdelegate.h \
     widget.h

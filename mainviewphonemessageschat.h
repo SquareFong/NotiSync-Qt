@@ -4,6 +4,12 @@
 #include <QWidget>
 #include <QStackedLayout>
 #include <QLabel>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QPushButton>
+#include <QListView>
+#include <QStandardItemModel>
+
 class PhoneMessagesChat : public QWidget
 {
     Q_OBJECT
@@ -14,6 +20,10 @@ signals:
 
 private:
     QStackedLayout *stacklayout;
+
+    QVBoxLayout *singleChatView;
+    QHBoxLayout *singleChatViewTitle;
+    QListView *singleChatContent;
 };
 
 #endif // PHONEMESSAGESCHAT_H
