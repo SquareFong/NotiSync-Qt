@@ -40,17 +40,15 @@ PhoneMessages::PhoneMessages(QWidget *parent) :
     //左边部分，结束
 
     //右边部分，开始
-//    messagesContentLayout = new QVBoxLayout();
-//    messagesContentLayout->addWidget(new QListView());
-    messagesChatLayout = new PhoneMessagesChat();
+    //messagesChatLayout = new PhoneMessagesChat();
 
     //右边部分，结束
 
     mainLayout = new QHBoxLayout();
     mainLayout->addLayout(messagesListLayout);
-    mainLayout->addWidget(messagesChatLayout);
+    //mainLayout->addWidget(messagesChatLayout);
     mainLayout->setStretchFactor(messagesListLayout, 2);
-    mainLayout->setStretchFactor(messagesChatLayout, 3);
+    //mainLayout->setStretchFactor(messagesChatLayout, 3);
 
     setLayout(mainLayout);
 }
