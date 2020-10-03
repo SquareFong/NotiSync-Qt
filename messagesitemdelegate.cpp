@@ -15,7 +15,7 @@ void MessagesItemDelegate::paint(QPainter *painter,
     if (index.isValid()) {
         painter->save();
         QVariant var = index.data(Qt::UserRole+1);
-        MessagesItemData itemData = var.value<MessagesItemData>();
+        MessagesBriefData itemData = var.value<MessagesBriefData>();
 
         // item 矩形区域
         QRectF rect;

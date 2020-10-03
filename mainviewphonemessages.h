@@ -13,6 +13,7 @@
 #include <ctime>
 
 #include "messagesitemdelegate.h"
+#include "chatview.h"
 
 namespace Ui {
 class PhoneMessages;
@@ -43,8 +44,8 @@ private:
     QStandardItemModel *pMessageListModel;
 
     //右侧短信详情
-    QVBoxLayout *messagesContentLayout;
-    //PhoneMessagesChat *messagesChatLayout;
+    //QVBoxLayout *messageChatLayout;
+    ChatView *messageSingleChat;//单个短信对话
 };
 
 #endif // MAINVIEWPHONEMESSAGES_H

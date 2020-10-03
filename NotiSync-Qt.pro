@@ -9,22 +9,26 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    chatview.cpp \
     loginview.cpp \
     main.cpp \
     mainview.cpp \
     mainviewphonedetails.cpp \
     mainviewphonemessages.cpp \
     mainviewphonenotifications.cpp \
+    messageitemwidget.cpp \
     messagesitemdelegate.cpp \
     notificationitemdelegate.cpp \
     widget.cpp
 
 HEADERS += \
+    chatview.h \
     loginview.h \
     mainview.h \
     mainviewphonedetails.h \
     mainviewphonemessages.h \
     mainviewphonenotifications.h \
+    messageitemwidget.h \
     notificationitemdelegate.h \
     messagesitemdelegate.h \
     widget.h

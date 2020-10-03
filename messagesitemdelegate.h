@@ -17,13 +17,13 @@ public:
                    const QModelIndex &index) const Q_DECL_OVERRIDE;
 };
 
-typedef struct MessagesItemData{
+typedef struct MessagesBriefData{
     QString IconPath;
     QString Contact;
     QString Number;
     QString Content;
     QString Time;
-} MessagesItemData;
+} MessagesBriefData;
 
-Q_DECLARE_METATYPE(MessagesItemData)
+Q_DECLARE_METATYPE(MessagesBriefData)
 #endif // MESSAGESITEMDELEGATE_H
