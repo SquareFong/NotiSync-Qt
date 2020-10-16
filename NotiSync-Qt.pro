@@ -18,6 +18,7 @@ SOURCES += \
     mainviewphonenotifications.cpp \
     messageitemwidget.cpp \
     messagesitemdelegate.cpp \
+    networkutils.cpp \
     notificationitemdelegate.cpp \
     widget.cpp
 
@@ -29,6 +30,7 @@ HEADERS += \
     mainviewphonemessages.h \
     mainviewphonenotifications.h \
     messageitemwidget.h \
+    networkutils.h \
     notificationitemdelegate.h \
     messagesitemdelegate.h \
     widget.h
