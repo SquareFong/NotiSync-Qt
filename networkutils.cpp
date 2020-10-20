@@ -19,6 +19,10 @@ void NetworkUtils::post(string url, string jsonObj){
 
     if(curl)
     {
+        if(url[url.length()-1] != '/'){
+            url += "/";
+        }
+        url += "send";
         curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, true);
         curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, true);
         curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
@@ -53,7 +57,8 @@ void NetworkUtils::post(string url, string jsonObj){
     curl_global_cleanup();
 }
 
-void NetworkUtils::get(string url, string jsonObj){
+void NetworkUtils::get(string url,
+                       string UUID, string Time, string Type){
 
     CURL *curl;
     CURLcode res;
@@ -62,14 +67,17 @@ void NetworkUtils::get(string url, string jsonObj){
 
     if(curl)
     {
+        if(url[url.length()-1] != '/'){
+            url += "/";
+        }
+        url += "get";
+        url += (string("?") + "UUID=" + UUID + "&Time=" + Time + "&Type=" + Type);
         curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, true);
         curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, true);
         curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
 
         // if url is redirected, so we tell libcurl to follow redirection
         curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
-
-        curl_easy_setopt(curl, CURLOPT_HTTPGET, jsonObj.c_str());
 
         string response_string;
         string header_string;

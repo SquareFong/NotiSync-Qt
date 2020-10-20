@@ -17,7 +17,7 @@ public:
 
     static void post(string url, string jsonObj);
 
-    void get(string url, string jsonObj);
+    static void get(string url, string UUID, string Time, string Type);
 };
 
 
