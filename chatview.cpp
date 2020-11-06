@@ -1,12 +1,13 @@
 #include "chatview.h"
 
-ChatView::ChatView(QWidget *parent) : QWidget(parent)
+ChatView::ChatView(QWidget* parent)
+    : QWidget(parent)
 {
     mainLayout = new QVBoxLayout();
 
     contactName = new QLabel("test contact");
     deleteChat = new QPushButton("Del");
-    QHBoxLayout *title = new QHBoxLayout();
+    QHBoxLayout* title = new QHBoxLayout();
     title->addWidget(contactName);
     title->addWidget(deleteChat);
     mainLayout->addLayout(title);
@@ -24,9 +25,10 @@ ChatView::ChatView(QWidget *parent) : QWidget(parent)
     setLayout(mainLayout);
 }
 
-void ChatView::pushContent(MessageItemData data){
-    QListWidgetItem *item = new QListWidgetItem(chatContent);
-    MessageItemWidget *message = new MessageItemWidget(chatContent);
+void ChatView::pushContent(MessageItemData data)
+{
+    QListWidgetItem* item = new QListWidgetItem(chatContent);
+    MessageItemWidget* message = new MessageItemWidget(chatContent);
     message->setFixedWidth(width());
     message->setItemData(data);
     item->setSizeHint(message->sizeWidget);

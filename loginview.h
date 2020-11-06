@@ -3,18 +3,17 @@
 
 #include <QWidget>
 
-//这里是0号页面
+/*这里是0号页面*/
 
 namespace Ui {
 class LoginView;
 }
 
-class LoginView : public QWidget
-{
+class LoginView : public QWidget {
     Q_OBJECT
 
 public:
-    explicit LoginView(int, int, QWidget *parent = nullptr);
+    explicit LoginView(int, int, QWidget* parent = nullptr);
     ~LoginView();
 
 signals:
@@ -24,7 +23,7 @@ private slots:
     void on_pushButton_clicked();
 
 private:
-    Ui::LoginView *ui;
+    Ui::LoginView* ui;
 };
 
 #endif // LOGINVIEW_H

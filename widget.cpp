@@ -1,7 +1,7 @@
 #include "widget.h"
 //#include "ui_widget.h"
 
-Widget::Widget(QWidget *parent)
+Widget::Widget(QWidget* parent)
     : QWidget(parent)
 {
 
@@ -17,7 +17,6 @@ Widget::Widget(QWidget *parent)
     stackLayout->addWidget(mainView);
     connect(mainView, &MainView::display, stackLayout, &QStackedLayout::setCurrentIndex);
 
-
     mainLayout = new QVBoxLayout;
     mainLayout->addLayout(stackLayout);
     setLayout(mainLayout);
@@ -27,4 +26,3 @@ Widget::~Widget()
 {
     //delete ui;
 }
-

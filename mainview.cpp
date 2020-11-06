@@ -1,12 +1,14 @@
 #include "mainview.h"
 
-#include<QMouseEvent>
+#include <QMouseEvent>
 
-class myQListWidgetItem : public QListWidgetItem{
+class myQListWidgetItem : public QListWidgetItem {
 signals:
-    void selected(int number){
+    void selected(int number)
+    {
         printf("Selected: %d \n", number);
     }
+
 public:
     int index;
     void setIndex(int number)
@@ -15,13 +17,14 @@ public:
     }
 };
 
-void MainView::listWidgetClicked(QListWidgetItem *item){
-    myQListWidgetItem *m = (myQListWidgetItem*)item;
+void MainView::listWidgetClicked(QListWidgetItem* item)
+{
+    myQListWidgetItem* m = (myQListWidgetItem*)item;
     stackLayout->setCurrentIndex(m->index);
 }
 
-MainView::MainView(int width, int height, QWidget *parent) :
-    QWidget(parent)
+MainView::MainView(int width, int height, QWidget* parent)
+    : QWidget(parent)
 {
     resize(width, height);
 
@@ -30,7 +33,7 @@ MainView::MainView(int width, int height, QWidget *parent) :
     listWidget->setSelectionMode(QListWidget::SingleSelection);
     connect(listWidget, &QListWidget::itemClicked, this, &MainView::listWidgetClicked);
     // 详情
-    myQListWidgetItem *phoneDetailButton = new myQListWidgetItem();
+    myQListWidgetItem* phoneDetailButton = new myQListWidgetItem();
     phoneDetailButton->setText("Detail");
     phoneDetailButton->setIcon(QIcon(":/Icons/smartphone"));
     phoneDetailButton->setTextAlignment(Qt::AlignLeft);
@@ -38,7 +41,7 @@ MainView::MainView(int width, int height, QWidget *parent) :
     phoneDetailButton->setIndex(0);
     listWidget->addItem(phoneDetailButton);
     // 通知
-    myQListWidgetItem *notiButton = new myQListWidgetItem();
+    myQListWidgetItem* notiButton = new myQListWidgetItem();
     notiButton->setText("Notifications");
     notiButton->setIcon(QIcon(":/Icons/notification"));
     notiButton->setTextAlignment(Qt::AlignLeft);
@@ -46,7 +49,7 @@ MainView::MainView(int width, int height, QWidget *parent) :
     notiButton->setIndex(1);
     listWidget->addItem(notiButton);
     // 短信
-    myQListWidgetItem *smsButton = new myQListWidgetItem();
+    myQListWidgetItem* smsButton = new myQListWidgetItem();
     smsButton->setText("Messages");
     smsButton->setIcon(QIcon(":/Icons/messages"));
     smsButton->setTextAlignment(Qt::AlignLeft);
@@ -76,9 +79,8 @@ MainView::MainView(int width, int height, QWidget *parent) :
     mainLayout->addLayout(stackLayout);
 
     mainLayout->setStretchFactor(listWidget, 1);
-    mainLayout->setStretchFactor(stackLayout,4);
+    mainLayout->setStretchFactor(stackLayout, 4);
     setLayout(mainLayout);
-
 }
 
 MainView::~MainView()
