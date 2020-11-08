@@ -9,37 +9,35 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    chatview.cpp \
-    loginview.cpp \
-    main.cpp \
-    mainview.cpp \
-    mainviewphonedetails.cpp \
-    mainviewphonemessages.cpp \
-    mainviewphonenotifications.cpp \
-    messageitemwidget.cpp \
-    messagesitemdelegate.cpp \
-    networkutils.cpp \
-    notificationitemdelegate.cpp \
+    src/widgets/chatview.cpp \
+    src/widgets/loginview.cpp \
+    src/main.cpp \
+    src/widgets/mainview.cpp \
+    src/widgets/mainviewphonedetails.cpp \
+    src/widgets/mainviewphonemessages.cpp \
+    src/widgets/mainviewphonenotifications.cpp \
+    src/widgets/messageitemwidget.cpp \
+    src/widgets/messagesitemdelegate.cpp \
+    src/widgets/notificationitemdelegate.cpp \
     src/core/communicationstructs.cpp \
     src/core/networkutils.cpp \
     src/core/notisyncclient.cpp \
-    widget.cpp
+    src/widgets/widget.cpp
 
 HEADERS += \
-    chatview.h \
-    loginview.h \
-    mainview.h \
-    mainviewphonedetails.h \
-    mainviewphonemessages.h \
-    mainviewphonenotifications.h \
-    messageitemwidget.h \
-    networkutils.h \
-    notificationitemdelegate.h \
-    messagesitemdelegate.h \
+    src/widgets/chatview.h \
+    src/widgets/loginview.h \
+    src/widgets/mainview.h \
+    src/widgets/mainviewphonedetails.h \
+    src/widgets/mainviewphonemessages.h \
+    src/widgets/mainviewphonenotifications.h \
+    src/widgets/messageitemwidget.h \
+    src/widgets/notificationitemdelegate.h \
+    src/widgets/messagesitemdelegate.h \
     src/core/communicationstructs.h \
     src/core/networkutils.h \
     src/core/notisyncclient.h \
-    widget.h
+    src/widgets/widget.h
 
 FORMS += \
     loginview.ui

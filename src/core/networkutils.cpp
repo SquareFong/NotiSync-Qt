@@ -1,4 +1,4 @@
-#include "networkutils.h"
+#include "src/core/networkutils.h"
 
 NetworkUtils::NetworkUtils()
 {
