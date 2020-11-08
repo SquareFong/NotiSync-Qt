@@ -20,6 +20,9 @@ SOURCES += \
     messagesitemdelegate.cpp \
     networkutils.cpp \
     notificationitemdelegate.cpp \
+    src/core/communicationstructs.cpp \
+    src/core/networkutils.cpp \
+    src/core/notisyncclient.cpp \
     widget.cpp
 
 HEADERS += \
@@ -33,6 +36,9 @@ HEADERS += \
     networkutils.h \
     notificationitemdelegate.h \
     messagesitemdelegate.h \
+    src/core/communicationstructs.h \
+    src/core/networkutils.h \
+    src/core/notisyncclient.h \
     widget.h
 
 FORMS += \
