@@ -20,7 +20,7 @@ public:
 
     void routine()
     {
-        while (true) {
+        while (nsc->run()) {
             nsc->fetchNotifications();
             nsc->fetchPhoneDetail();
             nsc->fetchMessages();

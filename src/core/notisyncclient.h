@@ -21,6 +21,7 @@ private:
     string url;
     string uuid;
 
+    bool isRun;
     PhoneDetail phoneDetail;
     vector<Notification> notifications;
     vector<Message> messages;
@@ -52,6 +53,14 @@ private:
 
 public:
     NotiSyncClient();
+    inline void setRunable(bool run)
+    {
+        this->isRun = run;
+    }
+    inline bool run()
+    {
+        return isRun;
+    }
     inline void setServer(string protocol, string server, string port)
     {
         this->protocol = protocol;

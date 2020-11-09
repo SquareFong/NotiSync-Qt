@@ -23,9 +23,6 @@ Widget::Widget(QWidget* parent)
     nsc = new NotiSyncClient();
     nsc->setUUID("7517e18a-40a6-4902-a7c9-23bd0ef7f00f");
     nsc->setServer("http", "127.0.0.1", "9000");
-
-    //    std::thread t1(&Widget::routine, this);
-    //    t1.join();
 }
 
 Widget::~Widget()

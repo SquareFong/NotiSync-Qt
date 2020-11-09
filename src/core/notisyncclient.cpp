@@ -3,7 +3,10 @@
 #include <QStringList>
 #include <QtCore/QJsonParseError>
 
-NotiSyncClient::NotiSyncClient() { }
+NotiSyncClient::NotiSyncClient()
+{
+    isRun = false;
+}
 
 void* NotiSyncClient::fetchPhoneDetail()
 {
