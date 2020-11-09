@@ -5,7 +5,7 @@
 
 NotiSyncClient::NotiSyncClient() { }
 
-void NotiSyncClient::fetchPhoneDetail()
+void* NotiSyncClient::fetchPhoneDetail()
 {
     string output;
     NetworkUtils::get(url, uuid, getTime(), "Detail", output);
@@ -16,7 +16,7 @@ void NotiSyncClient::fetchPhoneDetail()
 
     if (jsonPareseError.error != QJsonParseError::NoError) {
         qDebug() << "NotiSyncClient::fetchPhoneDetail():\t JSON格式错误";
-        return;
+        return 0;
     } else {
         QJsonObject jsonObj = jsonDoc.object();
         QJsonValue jsonDataVal = jsonObj.value("Data");
@@ -69,7 +69,7 @@ fromStrToQStringList(const string& str)
     return l;
 }
 
-void NotiSyncClient::fetchNotifications()
+void* NotiSyncClient::fetchNotifications()
 {
     string output;
     NetworkUtils::get(url, uuid, getTime(), "Notifications", output);
@@ -78,12 +78,16 @@ void NotiSyncClient::fetchNotifications()
         output.c_str(), &jsonPareseError); //字符串格式化为JSON
 
     if (jsonPareseError.error != QJsonParseError::NoError) {
-        qDebug() << "NotiSyncClient::fetchPhoneDetail():\t JSON格式错误";
-        return;
+        qDebug() << "NotiSyncClient::fetchNotifications():\t JSON格式错误";
+        return 0;
     } else {
         QJsonObject jsonObj = jsonDoc.object();
         QJsonValue jsonDataVal = jsonObj.value("Data");
         string dataRaw = NetworkUtils::fromBase64(jsonDataVal.toString().toStdString());
+        if (dataRaw.empty() || dataRaw == "null") {
+            printf("NotiSyncClient::fetchNotifications() \t Null data\n");
+            return 0;
+        }
         QStringList dataList = fromStrToQStringList(dataRaw);
         QJsonArray jsonArr = QJsonArray::fromStringList(dataList);
         if (!jsonArr.empty()) {
@@ -105,7 +109,7 @@ void NotiSyncClient::fetchNotifications()
     }
 }
 
-void NotiSyncClient::fetchMessages()
+void* NotiSyncClient::fetchMessages()
 {
     string output;
     NetworkUtils::get(url, uuid, getTime(), "Messages", output);
@@ -114,8 +118,8 @@ void NotiSyncClient::fetchMessages()
         output.c_str(), &jsonPareseError); //字符串格式化为JSON
 
     if (jsonPareseError.error != QJsonParseError::NoError) {
-        qDebug() << "NotiSyncClient::fetchPhoneDetail():\t JSON格式错误";
-        return;
+        qDebug() << "NotiSyncClient::fetchMessages():\t JSON格式错误";
+        return 0;
     } else {
         QJsonObject jsonObj = jsonDoc.object();
         QJsonValue jsonDataVal = jsonObj.value("Data");
@@ -145,7 +149,7 @@ void NotiSyncClient::fetchMessages()
     }
 }
 
-void NotiSyncClient::sendNewMessage(Message message)
+void* NotiSyncClient::sendNewMessage(Message message)
 {
     QJsonObject dataObj;
     dataObj.insert("Number", message.number.c_str());

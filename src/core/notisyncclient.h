@@ -66,10 +66,10 @@ public:
     }
 
     //Network functions
-    void fetchPhoneDetail();
-    void fetchNotifications();
-    void fetchMessages();
-    void sendNewMessage(Message message);
+    void* fetchPhoneDetail();
+    void* fetchNotifications();
+    void* fetchMessages();
+    void* sendNewMessage(Message message);
 
     //用于fetchMessages内调用
     void refreshMessageDigestList(const vector<Message>& newMessages)

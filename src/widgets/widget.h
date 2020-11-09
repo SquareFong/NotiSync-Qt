@@ -6,7 +6,9 @@
 #include <QStackedLayout>
 #include <QVBoxLayout>
 #include <QWidget>
+#include <unistd.h>
 
+#include "src/core/notisyncclient.h"
 //class LoginView;
 
 class Widget : public QWidget {
@@ -16,11 +18,22 @@ public:
     Widget(QWidget* parent = nullptr);
     ~Widget();
 
+    void routine()
+    {
+        while (true) {
+            nsc->fetchNotifications();
+            nsc->fetchPhoneDetail();
+            nsc->fetchMessages();
+            sleep(1);
+        }
+    }
+
 private:
     LoginView* loginView;
     MainView* mainView;
     //Ui::Widget *ui;
     QStackedLayout* stackLayout;
     QVBoxLayout* mainLayout;
+    NotiSyncClient* nsc;
 };
 #endif // WIDGET_H
