@@ -22,6 +22,8 @@ public:
 
 signals:
     void display(int number);
+public slots:
+    void onLoginPushed();
 
 private:
     //登录主页面

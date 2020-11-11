@@ -39,6 +39,7 @@ LoginView::LoginView(int width, int height, QWidget* parent)
             QRegExp("[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}")));
 
     login = new QPushButton("Login");
+    connect(login, &QPushButton::clicked, this, &LoginView::onLoginPushed);
 
     configurations = new QGridLayout();
     configurations->addWidget(new QLabel("Protocols: "), 0, 0);
@@ -68,6 +69,12 @@ LoginView::LoginView(int width, int height, QWidget* parent)
     loginLayout->setStretchFactor(configurations, 1);
 
     this->setLayout(loginLayout);
+}
+
+void LoginView::onLoginPushed()
+{
+    //TODO 保存配置文件，设置来自Widget.cpp的nsc;
+    emit display(1);
 }
 
 LoginView::~LoginView()
