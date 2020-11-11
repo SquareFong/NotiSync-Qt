@@ -42,7 +42,6 @@ HEADERS += \
     src/widgets/widget.h
 
 FORMS += \
-    loginview.ui
 
 LIBS += -lcurl
 

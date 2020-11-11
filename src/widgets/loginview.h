@@ -12,10 +12,6 @@
 #include <QWidget>
 /*这里是0号页面*/
 
-namespace Ui {
-class LoginView;
-}
-
 class LoginView : public QWidget {
     Q_OBJECT
 
@@ -42,7 +38,6 @@ private:
     QLineEdit* port;
     QLineEdit* uuid;
     QPushButton* login;
-    //Ui::LoginView* ui;
 };
 
 #endif // LOGINVIEW_H
