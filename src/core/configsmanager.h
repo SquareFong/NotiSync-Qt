@@ -26,51 +26,8 @@ class ConfigsManager {
 
 public:
     ConfigsManager();
-    bool readServerConfig()
-    {
-        bool success = false;
-        string content = readFile(path + serverCfgName);
-        if (!content.empty()) {
-            QJsonParseError jsonPareseError;
-            QJsonDocument jsonDoc = QJsonDocument::fromJson(
-                content.c_str(), &jsonPareseError);
-            if (jsonPareseError.error != QJsonParseError::NoError) {
-                qDebug() << "ConfigsManager::readServerConfig():\t JSON格式错误";
-            } else {
-                set<string> properties = { "protocol", "address", "port", "uuid", "isRun" };
-                QJsonObject jsonObj = jsonDoc.object();
-                bool isLegal = true;
-                ServerConfig sc;
-                for (auto it = jsonObj.begin(); it != jsonObj.end(); ++it) {
-                    if (properties.find(it.key().toStdString()) == properties.end()) {
-                        isLegal = false;
-                        break;
-                    }
-                    if (it.key().toStdString() == "protocol") {
-                        sc.protocol = it.value().toString().toStdString();
-                    } else if (it.key().toStdString() == "address") {
-                        sc.address = it.value().toString().toStdString();
-                    } else if (it.key().toStdString() == "port") {
-                        sc.port = it.value().toString().toStdString();
-                    } else if (it.key().toStdString() == "uuid") {
-                        sc.uuid = it.value().toString().toStdString();
-                    } else if (it.key().toStdString() == "isRun") {
-                        sc.isRun = it.value().toBool();
-                    } else {
-                        isLegal = false;
-                        break;
-                    }
-                }
-                if (isLegal) {
-                    success = true;
-                    serverConfig = sc;
-                } else {
-                    printf("ConfigsManager::readServerConfig():\t JSON属性有错误");
-                }
-            }
-        }
-        return success;
-    }
+    ServerConfig& getServerconfig();
+    bool readServerConfig();
 
 public:
     static string readFile(const string& path)
