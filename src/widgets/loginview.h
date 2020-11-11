@@ -1,8 +1,15 @@
 #ifndef LOGINVIEW_H
 #define LOGINVIEW_H
 
+#include <QComboBox>
+#include <QFrame>
+#include <QGridLayout>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QVBoxLayout>
 #include <QWidget>
-
 /*这里是0号页面*/
 
 namespace Ui {
@@ -19,11 +26,23 @@ public:
 signals:
     void display(int number);
 
-private slots:
-    void on_pushButton_clicked();
-
 private:
-    Ui::LoginView* ui;
+    //登录主页面
+    QHBoxLayout* loginLayout;
+    //TODO 左边部分
+    QLabel* qrCode;
+
+    QFrame* seperatrLine;
+
+    //右边部分
+    QGridLayout* configurations;
+
+    QComboBox* protocols;
+    QLineEdit* address;
+    QLineEdit* port;
+    QLineEdit* uuid;
+    QPushButton* login;
+    //Ui::LoginView* ui;
 };
 
 #endif // LOGINVIEW_H
