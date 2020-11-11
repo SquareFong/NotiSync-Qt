@@ -1,6 +1,7 @@
 #ifndef LOGINVIEW_H
 #define LOGINVIEW_H
 
+#include "src/core/configsmanager.h"
 #include <QComboBox>
 #include <QFrame>
 #include <QGridLayout>

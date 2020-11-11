@@ -1,17 +1,18 @@
 #include "configsmanager.h"
 #include <dirent.h>
 //#include<sys/types.h>
+#include <QDir>
 #include <sys/stat.h>
 
 ConfigsManager::ConfigsManager()
-    : path("~/.config/NotiSyncQt/")
+    : path(".config/NotiSyncQt/")
     , serverCfgName("server.json")
     , clientCfgName("NotiSyncQt.json")
 {
-    if (opendir(path.c_str()) == NULL) //如果文件夹不存在
+    QDir dir(QDir::homePath() + "/" + path.c_str());
+    if (!dir.exists()) //如果文件夹不存在
     {
-        int ret = mkdir(path.c_str(), 0660);
-        if (ret != 0) {
+        if (!dir.mkdir(dir.absolutePath())) {
             throw "Fail to local config files";
         }
     }
