@@ -5,6 +5,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <fstream>
+#include <map>
 #include <set>
 #include <string>
 using namespace std;
@@ -22,12 +23,13 @@ class ConfigsManager {
     const string path;
     const string serverCfgName;
     const string clientCfgName;
-    ServerConfig serverConfig;
+    map<string, string> serverConfig;
 
 public:
     ConfigsManager();
-    ServerConfig& getServerconfig();
+    map<string, string>& getServerconfig();
     bool readServerConfig();
+    bool saveServerConfig();
 
 public:
     static string readFile(const string& path)

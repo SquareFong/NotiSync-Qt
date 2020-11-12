@@ -13,12 +13,12 @@ ConfigsManager::ConfigsManager()
     if (!dir.exists()) //如果文件夹不存在
     {
         if (!dir.mkdir(dir.absolutePath())) {
-            throw "Fail to local config files";
+            throw "Fail to make directories for config files";
         }
     }
 }
 
-ServerConfig& ConfigsManager::getServerconfig()
+map<string, string>& ConfigsManager::getServerconfig()
 {
     return serverConfig;
 }
@@ -37,26 +37,15 @@ bool ConfigsManager::readServerConfig()
             set<string> properties = { "protocol", "address", "port", "uuid", "isRun" };
             QJsonObject jsonObj = jsonDoc.object();
             bool isLegal = true;
-            ServerConfig sc;
+            map<string, string> sc;
             for (auto it = jsonObj.begin(); it != jsonObj.end(); ++it) {
-                if (properties.find(it.key().toStdString()) == properties.end()) {
+                string k = it.key().toStdString();
+                string v = it.value().toString().toStdString();
+                if (properties.find(k) == properties.end()) {
                     isLegal = false;
                     break;
                 }
-                if (it.key().toStdString() == "protocol") {
-                    sc.protocol = it.value().toString().toStdString();
-                } else if (it.key().toStdString() == "address") {
-                    sc.address = it.value().toString().toStdString();
-                } else if (it.key().toStdString() == "port") {
-                    sc.port = it.value().toString().toStdString();
-                } else if (it.key().toStdString() == "uuid") {
-                    sc.uuid = it.value().toString().toStdString();
-                } else if (it.key().toStdString() == "isRun") {
-                    sc.isRun = it.value().toBool();
-                } else {
-                    isLegal = false;
-                    break;
-                }
+                sc.insert(pair<string, string>(it.key().toStdString(), it.value().toString().toStdString()));
             }
             if (isLegal) {
                 success = true;
