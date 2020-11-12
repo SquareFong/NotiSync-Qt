@@ -31,21 +31,8 @@ public:
     bool readServerConfig();
     bool saveServerConfig();
 
-public:
-    static string readFile(const string& path)
-    {
-        string contents;
-        ifstream inputFileStream(path);
-        if (inputFileStream.is_open()) {
-            int linesize = 1000;
-            while (!inputFileStream.eof()) {
-                char is[linesize];
-                inputFileStream.getline(is, linesize);
-                contents.append(is);
-            }
-        }
-        return contents;
-    }
+private:
+    string readFile(const string& path);
 };
 
 #endif // CONFIGSMANAGER_H

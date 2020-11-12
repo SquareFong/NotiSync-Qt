@@ -57,3 +57,18 @@ bool ConfigsManager::readServerConfig()
     }
     return success;
 }
+
+string ConfigsManager::readFile(const string& path)
+{
+    string contents;
+    ifstream inputFileStream(path);
+    if (inputFileStream.is_open()) {
+        int linesize = 1000;
+        while (!inputFileStream.eof()) {
+            char is[linesize];
+            inputFileStream.getline(is, linesize);
+            contents.append(is);
+        }
+    }
+    return contents;
+}
