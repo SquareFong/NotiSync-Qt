@@ -9,7 +9,6 @@
 #include <unistd.h>
 
 #include "src/core/notisyncclient.h"
-//class LoginView;
 
 class Widget : public QWidget {
     Q_OBJECT
@@ -31,7 +30,6 @@ public:
 private:
     LoginView* loginView;
     MainView* mainView;
-    //Ui::Widget *ui;
     QStackedLayout* stackLayout;
     QVBoxLayout* mainLayout;
     NotiSyncClient* nsc;

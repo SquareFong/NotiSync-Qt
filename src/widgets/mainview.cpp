@@ -57,8 +57,6 @@ MainView::MainView(int width, int height, QWidget* parent)
     listWidget->addItem(smsButton);
 
     listWidget->setCurrentRow(0);
-    //QVBoxLayout *leftLayout = new QVBoxLayout();
-    //leftLayout->addWidget(listWidget);
 
     //主界面右边部分
     stackLayout = new QStackedLayout();

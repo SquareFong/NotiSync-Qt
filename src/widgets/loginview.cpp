@@ -74,7 +74,6 @@ LoginView::LoginView(int width, int height, NotiSyncClient* NotiSyncClient, QWid
 
 void LoginView::onLoginPushed()
 {
-    //TODO 保存配置文件，设置来自Widget.cpp的nsc;
     string prot = protocols->currentText().toStdString();
     string addr = address->text().toStdString();
     string port = this->port->text().toStdString();
