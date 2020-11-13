@@ -21,8 +21,8 @@ public:
 
 class ConfigsManager {
     const string path;
-    const string serverCfgName;
-    const string clientCfgName;
+    string serverCfgName;
+    string clientCfgName;
     map<string, string> serverConfig;
 
 public:

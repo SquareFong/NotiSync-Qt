@@ -16,6 +16,7 @@ ConfigsManager::ConfigsManager()
             throw "Fail to make directories for config files";
         }
     }
+    serverCfgName = dir.absolutePath().toStdString() + "/" + serverCfgName;
 }
 
 map<string, string>& ConfigsManager::getServerconfig()
@@ -26,7 +27,7 @@ map<string, string>& ConfigsManager::getServerconfig()
 bool ConfigsManager::readServerConfig()
 {
     bool success = false;
-    string content = readFile(path + serverCfgName);
+    string content = readFile(serverCfgName);
     if (!content.empty()) {
         QJsonParseError jsonPareseError;
         QJsonDocument jsonDoc = QJsonDocument::fromJson(
@@ -69,7 +70,7 @@ bool ConfigsManager::saveServerConfig()
     jsonDoc.setObject(jsonObj);
     QByteArray jsonBytes = jsonDoc.toJson(QJsonDocument::Indented);
 
-    ofstream outFileStream(path + serverCfgName);
+    ofstream outFileStream(serverCfgName);
     if (outFileStream.is_open()) {
         outFileStream << jsonBytes.toStdString();
         outFileStream.close();
