@@ -58,6 +58,26 @@ bool ConfigsManager::readServerConfig()
     return success;
 }
 
+bool ConfigsManager::saveServerConfig()
+{
+    bool isSuccess = false;
+    QJsonObject jsonObj;
+    for (auto& it : serverConfig) {
+        jsonObj.insert(it.first.c_str(), it.second.c_str());
+    }
+    QJsonDocument jsonDoc;
+    jsonDoc.setObject(jsonObj);
+    QByteArray jsonBytes = jsonDoc.toJson(QJsonDocument::Indented);
+
+    ofstream outFileStream(path + serverCfgName);
+    if (outFileStream.is_open()) {
+        outFileStream << jsonBytes.toStdString();
+        outFileStream.close();
+    }
+
+    return isSuccess;
+}
+
 string ConfigsManager::readFile(const string& path)
 {
     string contents;
@@ -69,6 +89,7 @@ string ConfigsManager::readFile(const string& path)
             inputFileStream.getline(is, linesize);
             contents.append(is);
         }
+        inputFileStream.close();
     }
     return contents;
 }
