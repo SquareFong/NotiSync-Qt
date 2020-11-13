@@ -1,15 +1,16 @@
 #include "loginview.h"
 
-LoginView::LoginView(int width, int height, QWidget* parent)
+LoginView::LoginView(int width, int height, NotiSyncClient* NotiSyncClient, QWidget* parent)
     : QWidget(parent)
+    , nsc(NotiSyncClient)
 {
     resize(width, height);
 
-    ServerConfig serverCfg;
+    map<string, string> serverCfg;
+    cfgMan = new ConfigsManager();
     try {
-        ConfigsManager cfgMan;
-        if (cfgMan.readServerConfig()) {
-            serverCfg = cfgMan.getServerconfig();
+        if (cfgMan->readServerConfig()) {
+            serverCfg = cfgMan->getServerconfig();
             //TODO 检查配置合法性
         } else {
             //TODO 给初始化操作并写入本地文件
@@ -23,17 +24,17 @@ LoginView::LoginView(int width, int height, QWidget* parent)
     protocols->addItem("http");
     protocols->addItem("https");
 
-    protocols->setCurrentText(serverCfg.protocol.c_str());
+    protocols->setCurrentText(serverCfg.find("protocol")->second.c_str());
 
     address = new QLineEdit();
-    address->setText(serverCfg.address.c_str());
+    address->setText(serverCfg.find("address")->second.c_str());
 
     port = new QLineEdit();
-    port->setText(serverCfg.port.c_str());
+    port->setText(serverCfg.find("port")->second.c_str());
     port->setValidator(new QIntValidator(0, 65536));
 
     uuid = new QLineEdit();
-    uuid->setText(serverCfg.uuid.c_str());
+    uuid->setText(serverCfg.find("uuid")->second.c_str());
     uuid->setValidator(
         new QRegExpValidator(
             QRegExp("[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}")));
@@ -74,6 +75,49 @@ LoginView::LoginView(int width, int height, QWidget* parent)
 void LoginView::onLoginPushed()
 {
     //TODO 保存配置文件，设置来自Widget.cpp的nsc;
+    string prot = protocols->currentText().toStdString();
+    string addr = address->text().toStdString();
+    string port = this->port->text().toStdString();
+    string uuid = this->uuid->text().toStdString();
+
+    nsc->setServer(prot, addr, port);
+    nsc->setUUID(uuid);
+
+    //TODO 给nsc加登录验证，登录成功再保存
+    //nsc->setRunable(true);
+    map<string, string>& configs = cfgMan->getServerconfig();
+    set<string> properties = { "protocol", "address", "port", "uuid", "isRun" };
+    for (auto& it : properties) {
+        auto item = configs.find(it);
+        if (item != configs.end()) {
+            if (it == "protocol") {
+                item->second = prot;
+            } else if (it == "address") {
+                item->second = addr;
+            } else if (it == "port") {
+                item->second = port;
+            } else if (it == "uuid") {
+                item->second = uuid;
+            } else if (it == "isRun") {
+                item->second = "true";
+            } else {
+            }
+        } else {
+            if (it == "protocol") {
+                configs.insert(pair<string, string>(it, prot));
+            } else if (it == "address") {
+                configs.insert(pair<string, string>(it, addr));
+            } else if (it == "port") {
+                configs.insert(pair<string, string>(it, port));
+            } else if (it == "uuid") {
+                configs.insert(pair<string, string>(it, uuid));
+            } else if (it == "isRun") {
+                configs.insert(pair<string, string>(it, "true"));
+            } else {
+            }
+        }
+    }
+    cfgMan->saveServerConfig();
     emit display(1);
 }
 

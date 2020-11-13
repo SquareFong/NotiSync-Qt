@@ -2,6 +2,7 @@
 #define LOGINVIEW_H
 
 #include "src/core/configsmanager.h"
+#include "src/core/notisyncclient.h"
 #include <QComboBox>
 #include <QFrame>
 #include <QGridLayout>
@@ -17,7 +18,7 @@ class LoginView : public QWidget {
     Q_OBJECT
 
 public:
-    explicit LoginView(int, int, QWidget* parent = nullptr);
+    explicit LoginView(int, int, NotiSyncClient*, QWidget* parent = nullptr);
     ~LoginView();
 
 signals:
@@ -41,6 +42,9 @@ private:
     QLineEdit* port;
     QLineEdit* uuid;
     QPushButton* login;
+
+    ConfigsManager* cfgMan;
+    NotiSyncClient* const nsc;
 };
 
 #endif // LOGINVIEW_H
