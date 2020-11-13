@@ -13,6 +13,9 @@
 
 #include "chatview.h"
 #include "messagesitemdelegate.h"
+#include "src/core/notisyncclient.h"
+
+/*详情页（mainView）的2号页面*/
 
 namespace Ui {
 class PhoneMessages;
@@ -22,7 +25,7 @@ class PhoneMessages : public QWidget {
     Q_OBJECT
 
 public:
-    explicit PhoneMessages(QWidget* parent = nullptr);
+    explicit PhoneMessages(NotiSyncClient* NotiSyncClient, QWidget* parent = nullptr);
     ~PhoneMessages();
 
     void UpdateLastUpdate()
@@ -46,6 +49,7 @@ private:
     //右侧短信详情
     //QVBoxLayout *messageChatLayout;
     ChatView* messageSingleChat; //单个短信对话
+    NotiSyncClient* const nsc;
 };
 
 #endif // MAINVIEWPHONEMESSAGES_H

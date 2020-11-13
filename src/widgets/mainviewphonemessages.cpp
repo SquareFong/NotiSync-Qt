@@ -1,7 +1,8 @@
 #include "mainviewphonemessages.h"
 
-PhoneMessages::PhoneMessages(QWidget* parent)
+PhoneMessages::PhoneMessages(NotiSyncClient* NotiSyncClient, QWidget* parent)
     : QWidget(parent)
+    , nsc(NotiSyncClient)
 {
     //左边部分，开始
     messagesListLayout = new QVBoxLayout();

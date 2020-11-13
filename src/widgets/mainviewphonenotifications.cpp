@@ -3,8 +3,9 @@
 #include <QListWidgetItem>
 #include <QPushButton>
 
-PhoneNotifications::PhoneNotifications(QWidget* parent)
+PhoneNotifications::PhoneNotifications(NotiSyncClient* NotiSyncClient, QWidget* parent)
     : QWidget(parent)
+    , nsc(NotiSyncClient)
 {
     //头部标题
     header = new QHBoxLayout();

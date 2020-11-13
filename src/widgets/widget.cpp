@@ -13,7 +13,7 @@ Widget::Widget(QWidget* parent)
     stackLayout->addWidget(loginView);
     connect(loginView, &LoginView::display, stackLayout, &QStackedLayout::setCurrentIndex);
 
-    mainView = new MainView(width(), height());
+    mainView = new MainView(width(), height(), nsc);
     stackLayout->addWidget(mainView);
     connect(mainView, &MainView::display, stackLayout, &QStackedLayout::setCurrentIndex);
 

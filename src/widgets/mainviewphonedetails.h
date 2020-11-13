@@ -5,11 +5,14 @@
 #include <QLabel>
 #include <QWidget>
 
+#include "src/core/notisyncclient.h"
+
+/*详情页（mainView）的0号页面*/
 class PhoneDetails : public QWidget {
     Q_OBJECT
 
 public:
-    explicit PhoneDetails(QWidget* parent = nullptr);
+    explicit PhoneDetails(NotiSyncClient* NotiSyncClient, QWidget* parent = nullptr);
     ~PhoneDetails();
 
 public slots:
@@ -32,6 +35,7 @@ private:
     QLabel* phoneRamUsage;
     QLabel* phoneStorageUsage;
     QGridLayout* mainLayout;
+    NotiSyncClient* const nsc;
 };
 
 #endif // MAINVIEWPHONEDETAILS_H

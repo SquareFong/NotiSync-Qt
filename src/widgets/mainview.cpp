@@ -23,8 +23,9 @@ void MainView::listWidgetClicked(QListWidgetItem* item)
     stackLayout->setCurrentIndex(m->index);
 }
 
-MainView::MainView(int width, int height, QWidget* parent)
+MainView::MainView(int width, int height, NotiSyncClient* NotiSyncClient, QWidget* parent)
     : QWidget(parent)
+    , nsc(NotiSyncClient)
 {
     resize(width, height);
 
@@ -61,13 +62,13 @@ MainView::MainView(int width, int height, QWidget* parent)
     //主界面右边部分
     stackLayout = new QStackedLayout();
 
-    phoneDetails = new PhoneDetails(this);
+    phoneDetails = new PhoneDetails(nsc, this);
     stackLayout->addWidget(phoneDetails);
 
-    phoneNotifications = new PhoneNotifications();
+    phoneNotifications = new PhoneNotifications(nsc, this);
     stackLayout->addWidget(phoneNotifications);
 
-    phoneMessages = new PhoneMessages();
+    phoneMessages = new PhoneMessages(nsc, this);
     stackLayout->addWidget(phoneMessages);
 
     //设置主页面

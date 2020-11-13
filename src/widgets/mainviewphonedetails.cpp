@@ -2,8 +2,9 @@
 #include <QDebug>
 #include <QSpacerItem>
 
-PhoneDetails::PhoneDetails(QWidget* parent)
+PhoneDetails::PhoneDetails(NotiSyncClient* NotiSyncClient, QWidget* parent)
     : QWidget(parent)
+    , nsc(NotiSyncClient)
 {
     subTitle = new QLabel("Phone Details");
     QFont f("Noto Mono");
