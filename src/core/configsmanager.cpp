@@ -73,6 +73,7 @@ bool ConfigsManager::saveServerConfig()
     if (outFileStream.is_open()) {
         outFileStream << jsonBytes.toStdString();
         outFileStream.close();
+        isSuccess = true;
     }
 
     return isSuccess;
