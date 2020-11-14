@@ -4,6 +4,7 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QWidget>
+#include <map>
 
 #include "src/core/notisyncclient.h"
 
@@ -15,14 +16,8 @@ public:
     explicit PhoneDetails(NotiSyncClient* NotiSyncClient, QWidget* parent = nullptr);
     ~PhoneDetails();
 
-public slots:
-    void selected()
-    {
-        emit display(0);
-    }
-
-signals:
-    void display(int number);
+protected:
+    void timerEvent(QTimerEvent* event);
 
 private:
     QLabel* subTitle;
@@ -36,6 +31,9 @@ private:
     QLabel* phoneStorageUsage;
     QGridLayout* mainLayout;
     NotiSyncClient* const nsc;
+    map<string, string> details;
+
+    int m_timerid;
 };
 
 #endif // MAINVIEWPHONEDETAILS_H
