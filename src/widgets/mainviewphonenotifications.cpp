@@ -5,7 +5,7 @@
 #include <QTimerEvent>
 #include <utility>
 
-void PhoneNotifications::refreshView()
+void PhoneNotifications::refreshNotificationList()
 {
     vector<Notification> notis = nsc->getNotifications();
     pModel->clear();
@@ -23,7 +23,7 @@ void PhoneNotifications::refreshView()
 void PhoneNotifications::timerEvent(QTimerEvent* event)
 {
     if (event->timerId() == m_timerid) {
-        refreshView();
+        refreshNotificationList();
     }
 }
 PhoneNotifications::PhoneNotifications(NotiSyncClient* NotiSyncClient, QWidget* parent)

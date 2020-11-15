@@ -16,7 +16,7 @@
 class PhoneNotifications : public QWidget {
     Q_OBJECT
 
-    void refreshView();
+    void refreshNotificationList();
 
 public:
     explicit PhoneNotifications(NotiSyncClient* NotiSyncClient, QWidget* parent = nullptr);
@@ -26,7 +26,7 @@ public slots:
     //清空消息列表
     void clear()
     {
-        //notificationList->clear();
+        nsc->clearNotifications();
         pModel->clear();
     }
 
