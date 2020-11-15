@@ -99,6 +99,10 @@ public:
     //UI获取信息时使用
     PhoneDetail getPhoneDetail() const;
     vector<Notification> getNotifications() const;
+    void clearNotifications()
+    {
+        notifications.clear();
+    }
     vector<Message> getMessageDigest() const;
     vector<Message> getSingleChat(string number) const;
 };

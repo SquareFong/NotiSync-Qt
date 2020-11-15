@@ -16,8 +16,6 @@
 class PhoneNotifications : public QWidget {
     Q_OBJECT
 
-    void refreshNotificationList();
-
 public:
     explicit PhoneNotifications(NotiSyncClient* NotiSyncClient, QWidget* parent = nullptr);
     ~PhoneNotifications();
@@ -41,6 +39,9 @@ private:
     NotiSyncClient* const nsc;
 
     int m_timerid;
+
+private:
+    void refreshNotificationList();
 };
 
 #endif // MAINVIEWPHONENOTIFICATIONS_H
