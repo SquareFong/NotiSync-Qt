@@ -1,8 +1,37 @@
 #include "mainviewphonemessages.h"
 
+#include <QTimerEvent>
+
+void PhoneMessages::refreshMessageDigest()
+{
+    vector<Message> digest = nsc->getMessageDigest();
+    pMessageListModel->clear();
+    for (auto& item : digest) {
+        MessagesBriefData itemData {
+            ":/Icons/defaultAppLogo",
+            item.name.c_str(),
+            item.number.c_str(),
+            item.body.c_str(),
+            item.date.c_str()
+        };
+        QStandardItem* pItem = new QStandardItem;
+        pItem->setEditable(false);
+        pItem->setData(QVariant::fromValue(itemData), Qt::UserRole + 1);
+        pMessageListModel->appendRow(pItem);
+    }
+}
+
+void PhoneMessages::timerEvent(QTimerEvent* event)
+{
+    if (event->timerId() == m_timerid) {
+        //refreshMessageDigest();
+    }
+}
+
 PhoneMessages::PhoneMessages(NotiSyncClient* NotiSyncClient, QWidget* parent)
     : QWidget(parent)
     , nsc(NotiSyncClient)
+    , m_timerid(startTimer(300))
 {
     //左边部分，开始
     messagesListLayout = new QVBoxLayout();
@@ -34,9 +63,22 @@ PhoneMessages::PhoneMessages(NotiSyncClient* NotiSyncClient, QWidget* parent)
     pItem->setData(QVariant::fromValue(itemData), Qt::UserRole + 1);
     pMessageListModel->appendRow(pItem);
 
+    MessagesBriefData itemData1 {
+        ":/Icons/defaultAppLogo",
+        "test Contact1",
+        "10010",
+        "一条测试信息，看看这玩意能显示多长的文hhhhhhhhhhhhhhhh",
+        "星期2"
+    };
+    QStandardItem* pItem1 = new QStandardItem;
+    pItem1->setEditable(false);
+    pItem1->setData(QVariant::fromValue(itemData1), Qt::UserRole + 1);
+    pMessageListModel->appendRow(pItem1);
+
     messagesList->setItemDelegate(pItemDelegate);
     messagesList->setModel(pMessageListModel);
     messagesListLayout->addWidget(messagesList);
+    connect(messagesList, &QListView::clicked, this, &PhoneMessages::messageListClicked);
     //左边部分，结束
 
     //右边部分，开始

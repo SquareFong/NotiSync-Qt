@@ -34,6 +34,21 @@ public:
         lastUpdate->setText(QString("Last update time: ") + std::ctime(&lastUpdateTime));
     }
 
+public slots:
+    void messageListClicked(const QModelIndex& index)
+    {
+        QVariant qvar = index.data();
+        QByteArray qba = qvar.toByteArray();
+        int r = index.row();
+        printf("Row: %d\n", r);
+        QVariant var = index.data(Qt::UserRole + 1);
+        MessagesBriefData itemData = var.value<MessagesBriefData>();
+        printf("Number: %s\n", itemData.Number.toStdString().c_str());
+    }
+
+protected:
+    void timerEvent(QTimerEvent* event);
+
 private:
     QHBoxLayout* mainLayout;
 
@@ -50,6 +65,11 @@ private:
     //QVBoxLayout *messageChatLayout;
     ChatView* messageSingleChat; //单个短信对话
     NotiSyncClient* const nsc;
+
+    int m_timerid;
+
+private:
+    void refreshMessageDigest();
 };
 
 #endif // MAINVIEWPHONEMESSAGES_H
