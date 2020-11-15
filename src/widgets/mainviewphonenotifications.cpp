@@ -2,10 +2,34 @@
 
 #include <QListWidgetItem>
 #include <QPushButton>
+#include <QTimerEvent>
+#include <utility>
 
+void PhoneNotifications::refreshView()
+{
+    vector<Notification> notis = nsc->getNotifications();
+    pModel->clear();
+    for (auto& item : notis) {
+        NotificationItemData itemdata { ":/Icons/defaultAppLogo",
+            item.packageName.c_str(),
+            item.content.c_str() };
+        QStandardItem* pItem = new QStandardItem;
+        pItem->setEditable(false);
+        pItem->setData(QVariant::fromValue(std::move(itemdata)), Qt::UserRole + 1);
+        pModel->appendRow(pItem);
+    }
+}
+
+void PhoneNotifications::timerEvent(QTimerEvent* event)
+{
+    if (event->timerId() == m_timerid) {
+        refreshView();
+    }
+}
 PhoneNotifications::PhoneNotifications(NotiSyncClient* NotiSyncClient, QWidget* parent)
     : QWidget(parent)
     , nsc(NotiSyncClient)
+    , m_timerid(startTimer(300))
 {
     //头部标题
     header = new QHBoxLayout();
@@ -18,16 +42,6 @@ PhoneNotifications::PhoneNotifications(NotiSyncClient* NotiSyncClient, QWidget* 
     notificationList = new QListView();
     pModel = new QStandardItemModel();
 
-    //插入测试数据
-    NotificationItemData itemdata { ":/Icons/defaultAppLogo",
-        "test APP",
-        "test Content:这是一条中文测试，测试自动换行是否有效。。。。。长度不够，凑个数" };
-
-    QStandardItem* pItem = new QStandardItem;
-    pItem->setEditable(false);
-    pItem->setData(QVariant::fromValue(itemdata), Qt::UserRole + 1);
-
-    pModel->appendRow(pItem);
     NotificationItemDelegate* pItemDelegate = new NotificationItemDelegate();
     notificationList->setItemDelegate(pItemDelegate);
     notificationList->setModel(pModel);
