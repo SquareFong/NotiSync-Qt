@@ -29,6 +29,10 @@ public:
             //chatContent->setItemWidget(item, w);
         }
     }
+    void clear()
+    {
+        chatContent->clear();
+    }
 
 private:
     QVBoxLayout* mainLayout;
