@@ -37,13 +37,19 @@ public:
 public slots:
     void messageListClicked(const QModelIndex& index)
     {
-        QVariant qvar = index.data();
-        QByteArray qba = qvar.toByteArray();
-        int r = index.row();
-        printf("Row: %d\n", r);
         QVariant var = index.data(Qt::UserRole + 1);
         MessagesBriefData itemData = var.value<MessagesBriefData>();
         printf("Number: %s\n", itemData.Number.toStdString().c_str());
+        vector<Message> singleChat
+            = nsc->getSingleChat(itemData.Number.toStdString());
+
+        messageSingleChat->clear();
+        for (auto& it : singleChat) {
+            int direction = atoi(it.type.c_str());
+            direction = (direction == 1 ? -1 : 1);
+            MessageItemData item { direction, it.body.c_str(), stol(it.date) };
+            messageSingleChat->pushContent(item);
+        }
     }
 
 protected:
