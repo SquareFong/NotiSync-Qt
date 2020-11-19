@@ -83,12 +83,13 @@ public:
     //用于fetchMessages内调用
     void refreshMessageDigestList(const vector<Message>& newMessages)
     {
-        auto it = newMessages.rbegin();
+        auto it = newMessages.begin();
         //bool needSort = false;
-        for (; it != newMessages.rend(); ++it) {
+        for (; it != newMessages.end(); ++it) {
             auto tmp = findDigestByNumber((*it).number);
-            if (tmp != digest.end()) {
-                (*tmp) = (*it);
+            if ((tmp != digest.end())) {
+                if ((*tmp).getDate() < (*it).getDate())
+                    (*tmp) = (*it);
             } else {
                 digest.push_back(*it);
             }

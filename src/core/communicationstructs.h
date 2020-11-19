@@ -76,7 +76,7 @@ public:
 public:
     time_t getDate() const
     {
-        return atoi(date.c_str());
+        return stol(date);
     }
     void setDate(time_t date)
     {
