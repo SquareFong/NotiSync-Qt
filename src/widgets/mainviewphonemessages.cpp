@@ -24,7 +24,7 @@ void PhoneMessages::refreshMessageDigest()
 void PhoneMessages::timerEvent(QTimerEvent* event)
 {
     if (event->timerId() == m_timerid) {
-        //refreshMessageDigest();
+        refreshMessageDigest();
     }
 }
 

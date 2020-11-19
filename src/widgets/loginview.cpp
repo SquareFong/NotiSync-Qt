@@ -83,7 +83,7 @@ void LoginView::onLoginPushed()
     nsc->setUUID(uuid);
 
     //TODO 给nsc加登录验证，登录成功再保存
-    //nsc->setRunable(true);
+    nsc->setRunable(true);
     map<string, string>& configs = cfgMan->getServerconfig();
     set<string> properties = { "protocol", "address", "port", "uuid", "isRun" };
     for (auto& it : properties) {

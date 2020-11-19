@@ -7,9 +7,8 @@ int t = 0;
 void PhoneDetails::timerEvent(QTimerEvent* event)
 {
     if (event->timerId() == m_timerid) {
-        printf("Debug: Hit: PhoneDetails::timerEvent %d\n", ++t);
+        //printf("Debug: Hit: PhoneDetails::timerEvent %d\n", ++t);
         PhoneDetail pd = nsc->getPhoneDetail();
-
         phoneAndroidVersion->setText(pd.osVersion.c_str());
         phoneName->setText(pd.model.c_str());
         phoneKernelVersion->setText(pd.kernel.c_str());
