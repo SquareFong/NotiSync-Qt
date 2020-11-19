@@ -20,6 +20,9 @@ Widget::Widget(QWidget* parent)
     mainLayout = new QVBoxLayout;
     mainLayout->addLayout(stackLayout);
     setLayout(mainLayout);
+
+    std::thread* t1 = new std::thread(&Widget::routine, this);
+    t1->detach();
 }
 
 Widget::~Widget()

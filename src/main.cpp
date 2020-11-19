@@ -9,7 +9,7 @@ int main(int argc, char* argv[])
     Widget w;
     w.show();
 
-    std::thread t1(&Widget::routine, &w);
-    t1.detach();
+    //    std::thread t1(&Widget::routine, &w);
+    //    t1.detach();
     return a.exec();
 }

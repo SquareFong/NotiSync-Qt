@@ -19,11 +19,14 @@ public:
 
     void routine()
     {
-        while (nsc->run()) {
-            nsc->fetchNotifications();
-            nsc->fetchPhoneDetail();
-            nsc->fetchMessages();
+        while (true) {
+            if (nsc->run()) {
+                nsc->fetchNotifications();
+                nsc->fetchPhoneDetail();
+                nsc->fetchMessages();
+            }
             sleep(1);
+            printf("******fetch excuted******");
         }
     }
 
