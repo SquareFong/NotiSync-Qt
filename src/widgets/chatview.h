@@ -33,10 +33,15 @@ public:
     {
         chatContent->clear();
     }
+    inline void scrollToButtom()
+    {
+        chatContent->scrollToBottom();
+    }
+
+    QLabel* contactName;
 
 private:
     QVBoxLayout* mainLayout;
-    QLabel* contactName;
     QPushButton* deleteChat;
     QListWidget* chatContent;
     QTextEdit* inputArea;

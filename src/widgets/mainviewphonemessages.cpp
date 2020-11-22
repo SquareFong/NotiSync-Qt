@@ -5,19 +5,21 @@
 void PhoneMessages::refreshMessageDigest()
 {
     vector<Message> digest = nsc->getMessageDigest();
-    pMessageListModel->clear();
-    for (auto& item : digest) {
-        MessagesBriefData itemData {
-            ":/Icons/defaultAppLogo",
-            item.name.c_str(),
-            item.number.c_str(),
-            item.body.c_str(),
-            item.date.c_str()
-        };
-        QStandardItem* pItem = new QStandardItem;
-        pItem->setEditable(false);
-        pItem->setData(QVariant::fromValue(itemData), Qt::UserRole + 1);
-        pMessageListModel->appendRow(pItem);
+    if (digest.size()) {
+        pMessageListModel->clear();
+        for (auto& item : digest) {
+            MessagesBriefData itemData {
+                ":/Icons/defaultAppLogo",
+                item.name.c_str(),
+                item.number.c_str(),
+                item.body.c_str(),
+                item.date.c_str()
+            };
+            QStandardItem* pItem = new QStandardItem;
+            pItem->setEditable(false);
+            pItem->setData(QVariant::fromValue(itemData), Qt::UserRole + 1);
+            pMessageListModel->appendRow(pItem);
+        }
     }
 }
 

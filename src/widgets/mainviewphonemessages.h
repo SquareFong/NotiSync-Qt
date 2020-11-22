@@ -44,11 +44,17 @@ public slots:
             = nsc->getSingleChat(itemData.Number.toStdString());
 
         messageSingleChat->clear();
-        for (auto& it : singleChat) {
-            int direction = atoi(it.type.c_str());
-            direction = (direction == 1 ? -1 : 1);
-            MessageItemData item { direction, it.body.c_str(), stol(it.date) };
-            messageSingleChat->pushContent(item);
+        if (singleChat.size() != 0) {
+            for (auto it = singleChat.rbegin(); it != singleChat.rend(); ++it) {
+                int direction = atoi((*it).type.c_str());
+                direction = (direction == 1 ? -1 : 1);
+                MessageItemData item { direction, (*it).body.c_str(), stol((*it).date) };
+                messageSingleChat->pushContent(item);
+            }
+            messageSingleChat->contactName->setText((itemData.Contact.size() == 0) ? itemData.Number : itemData.Contact);
+            messageSingleChat->scrollToButtom();
+        } else {
+            messageSingleChat->contactName->setText("");
         }
     }
 
