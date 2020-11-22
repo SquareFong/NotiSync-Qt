@@ -45,37 +45,38 @@ PhoneMessages::PhoneMessages(NotiSyncClient* NotiSyncClient, QWidget* parent)
     //UpdateLastUpdate();
     //messagesListLayout->addWidget(lastUpdate);
 
-    newMessage = new QPushButton("New Message");
-    messagesListLayout->addWidget(newMessage);
+    createNewMessage = new QPushButton("New Message");
+    messagesListLayout->addWidget(createNewMessage);
+    connect(createNewMessage, &QPushButton::clicked, this, &PhoneMessages::createNewMessageClicked);
 
     messagesList = new QListView();
     pMessageListModel = new QStandardItemModel();
 
     MessagesItemDelegate* pItemDelegate = new MessagesItemDelegate();
     //插入测试数据
-    MessagesBriefData itemData {
-        ":/Icons/defaultAppLogo",
-        "test Contact",
-        "10086",
-        "一条测试信息，看看这玩意能显示多长的文本，啦啦啦啦啦啦啦啦啦",
-        "等一个星期三"
-    };
-    QStandardItem* pItem = new QStandardItem;
-    pItem->setEditable(false);
-    pItem->setData(QVariant::fromValue(itemData), Qt::UserRole + 1);
-    pMessageListModel->appendRow(pItem);
+    //    MessagesBriefData itemData {
+    //        ":/Icons/defaultAppLogo",
+    //        "test Contact",
+    //        "10086",
+    //        "一条测试信息，看看这玩意能显示多长的文本，啦啦啦啦啦啦啦啦啦",
+    //        "等一个星期三"
+    //    };
+    //    QStandardItem* pItem = new QStandardItem;
+    //    pItem->setEditable(false);
+    //    pItem->setData(QVariant::fromValue(itemData), Qt::UserRole + 1);
+    //    pMessageListModel->appendRow(pItem);
 
-    MessagesBriefData itemData1 {
-        ":/Icons/defaultAppLogo",
-        "test Contact1",
-        "10010",
-        "一条测试信息，看看这玩意能显示多长的文hhhhhhhhhhhhhhhh",
-        "星期2"
-    };
-    QStandardItem* pItem1 = new QStandardItem;
-    pItem1->setEditable(false);
-    pItem1->setData(QVariant::fromValue(itemData1), Qt::UserRole + 1);
-    pMessageListModel->appendRow(pItem1);
+    //    MessagesBriefData itemData1 {
+    //        ":/Icons/defaultAppLogo",
+    //        "test Contact1",
+    //        "10010",
+    //        "一条测试信息，看看这玩意能显示多长的文hhhhhhhhhhhhhhhh",
+    //        "星期2"
+    //    };
+    //    QStandardItem* pItem1 = new QStandardItem;
+    //    pItem1->setEditable(false);
+    //    pItem1->setData(QVariant::fromValue(itemData1), Qt::UserRole + 1);
+    //    pMessageListModel->appendRow(pItem1);
 
     messagesList->setItemDelegate(pItemDelegate);
     messagesList->setModel(pMessageListModel);

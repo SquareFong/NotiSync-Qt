@@ -2,8 +2,11 @@
 #define MAINVIEWPHONEMESSAGES_H
 
 #include <QHBoxLayout>
+#include <QInputDialog>
 #include <QLabel>
+#include <QLineEdit>
 #include <QListView>
+#include <QMessageBox>
 #include <QPushButton>
 #include <QStackedLayout>
 #include <QStandardItemModel>
@@ -51,10 +54,57 @@ public slots:
                 MessageItemData item { direction, (*it).body.c_str(), stol((*it).date) };
                 messageSingleChat->pushContent(item);
             }
-            messageSingleChat->contactName->setText((itemData.Contact.size() == 0) ? itemData.Number : itemData.Contact);
+            messageSingleChat->setContact((itemData.Contact.size() == 0) ? itemData.Number : itemData.Contact);
             messageSingleChat->scrollToButtom();
         } else {
-            messageSingleChat->contactName->setText("");
+            messageSingleChat->setContact("");
+        }
+    }
+
+    void createNewMessageClicked()
+    {
+        QString title = "NotiSync";
+        QString label = "Phone Number";
+        QString defaultInput = "";
+        QLineEdit::EchoMode echoMode = QLineEdit::Normal;
+        bool ok = false;
+        while (true) {
+            QString text = QInputDialog::getText(this, title, label,
+                echoMode, defaultInput, &ok);
+            if (ok) {
+                if (!text.isEmpty()) {
+                    bool isLong = false;
+                    unsigned long long num = text.toULongLong(&isLong);
+                    if (isLong) {
+                        //TODO 找对话，如果没有，新建对话
+                        messageSingleChat->clear();
+                        messageSingleChat->setContact(text);
+
+                        int rows = pMessageListModel->rowCount();
+                        int columns = pMessageListModel->columnCount();
+                        for (int i = 0; i < rows; ++i) {
+                            QStandardItem* item = pMessageListModel->item(i);
+                            QVariant var = item->data(Qt::UserRole + 1);
+                            MessagesBriefData itemData = var.value<MessagesBriefData>();
+                            if (itemData.Number == text) {
+                                messageListClicked(pMessageListModel->index(i, 0));
+                                i = rows;
+                            }
+                        }
+
+                        break;
+                    } else {
+                        QMessageBox::information(this,
+                            "Warning", "Input Invalid",
+                            QMessageBox::Ok, QMessageBox::Ok);
+                    }
+                } else {
+                    QMessageBox::information(this,
+                        "Warning", "Input were empty",
+                        QMessageBox::Ok, QMessageBox::Ok);
+                }
+            } else
+                break;
         }
     }
 
@@ -67,7 +117,7 @@ private:
     //左侧短信列表信息
     QVBoxLayout* messagesListLayout;
     QLabel* lastUpdate;
-    QPushButton* newMessage;
+    QPushButton* createNewMessage;
     time_t lastUpdateTime;
 
     QListView* messagesList;

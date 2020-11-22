@@ -32,15 +32,21 @@ public:
     void clear()
     {
         chatContent->clear();
+        inputArea->clear();
     }
     inline void scrollToButtom()
     {
         chatContent->scrollToBottom();
     }
 
-    QLabel* contactName;
+    void setContact(const QString contact)
+    {
+        contactName->setText(contact);
+        inputArea->setFocus();
+    }
 
 private:
+    QLabel* contactName;
     QVBoxLayout* mainLayout;
     QPushButton* deleteChat;
     QListWidget* chatContent;
