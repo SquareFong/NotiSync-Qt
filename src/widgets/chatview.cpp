@@ -1,7 +1,8 @@
 #include "chatview.h"
 
-ChatView::ChatView(QWidget* parent)
+ChatView::ChatView(NotiSyncClient* NotiSyncClient, QWidget* parent)
     : QWidget(parent)
+    , nsc(NotiSyncClient)
 {
     mainLayout = new QVBoxLayout();
 
@@ -18,9 +19,14 @@ ChatView::ChatView(QWidget* parent)
     inputArea = new QTextEdit();
     mainLayout->addWidget(inputArea);
 
+    sendMessage = new QPushButton("Send");
+    mainLayout->addWidget(sendMessage);
+    connect(sendMessage, &QPushButton::clicked, this, &ChatView::sendMessageClicked);
+
     mainLayout->setStretchFactor(title, 1);
     mainLayout->setStretchFactor(chatContent, 5);
     mainLayout->setStretchFactor(inputArea, 2);
+    mainLayout->setStretchFactor(sendMessage, 1);
 
     setLayout(mainLayout);
 }

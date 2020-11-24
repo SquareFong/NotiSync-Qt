@@ -2,6 +2,7 @@
 #define CHATVIEW_H
 
 #include "messageitemwidget.h"
+#include "src/core/notisyncclient.h"
 #include <QDebug>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -14,7 +15,7 @@
 class ChatView : public QWidget {
     Q_OBJECT
 public:
-    explicit ChatView(QWidget* parent = nullptr);
+    explicit ChatView(NotiSyncClient* NotiSyncClient, QWidget* parent = nullptr);
     void pushContent(MessageItemData data);
     void resizeEvent(QResizeEvent* event)
     {
@@ -42,7 +43,26 @@ public:
     void setContact(const QString contact)
     {
         contactName->setText(contact);
+        currentContactNumber = contact;
         inputArea->setFocus();
+    }
+
+private slots:
+    void sendMessageClicked()
+    {
+        Message m;
+        m.number = currentContactNumber.toStdString();
+        m.body = inputArea->toPlainText().toStdString();
+        time_t t;
+        time(&t);
+        m.date = to_string(t * 1000);
+        m.type = 2;
+
+        MessageItemData item { 1, m.body.c_str(), stol(m.date) };
+        pushContent(item);
+
+        nsc->sendNewMessage(m);
+        inputArea->clear();
     }
 
 private:
@@ -51,6 +71,9 @@ private:
     QPushButton* deleteChat;
     QListWidget* chatContent;
     QTextEdit* inputArea;
+    QPushButton* sendMessage;
+    QString currentContactNumber; //用来保存当前联系人号码
+    NotiSyncClient* const nsc;
 };
 
 #endif // CHATVIEW_H
