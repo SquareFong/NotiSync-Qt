@@ -54,7 +54,7 @@ public slots:
                 MessageItemData item { direction, (*it).body.c_str(), stol((*it).date) };
                 messageSingleChat->pushContent(item);
             }
-            messageSingleChat->setContact((itemData.Contact.size() == 0) ? itemData.Number : itemData.Contact);
+            messageSingleChat->setContact(itemData.Number);
             messageSingleChat->scrollToButtom();
         } else {
             messageSingleChat->setContact("");
@@ -124,7 +124,6 @@ private:
     QStandardItemModel* pMessageListModel;
 
     //右侧短信详情
-    //QVBoxLayout *messageChatLayout;
     ChatView* messageSingleChat; //单个短信对话
     NotiSyncClient* const nsc;
 

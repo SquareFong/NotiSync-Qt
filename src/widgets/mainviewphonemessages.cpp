@@ -85,15 +85,15 @@ PhoneMessages::PhoneMessages(NotiSyncClient* NotiSyncClient, QWidget* parent)
     //左边部分，结束
 
     //右边部分，开始
-    messageSingleChat = new ChatView();
+    messageSingleChat = new ChatView(nsc, this);
     time_t t;
     time(&t);
-    MessageItemData item { -1, "哈哈哈哈哈哈哈哈哈", t };
-    messageSingleChat->pushContent(item);
-    item.messageDirection = 1;
-    messageSingleChat->pushContent(item);
-    item.messageContent = QString("我就测试一下这玩意到底能显示多少字开始自动换行, 阿三客户端分量卡及山大路分开,阿克苏觉得很烦拉卡就是多了封口机和拉跨技术鉴定还复来卡及士大夫");
-    messageSingleChat->pushContent(item);
+    //    MessageItemData item { -1, "哈哈哈哈哈哈哈哈哈", t };
+    //    messageSingleChat->pushContent(item);
+    //    item.messageDirection = 1;
+    //    messageSingleChat->pushContent(item);
+    //    item.messageContent = QString("我就测试一下这玩意到底能显示多少字开始自动换行, 阿三客户端分量卡及山大路分开,阿克苏觉得很烦拉卡就是多了封口机和拉跨技术鉴定还复来卡及士大夫");
+    //    messageSingleChat->pushContent(item);
     //右边部分，结束
 
     mainLayout = new QHBoxLayout();
