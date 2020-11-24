@@ -6,6 +6,7 @@
 NotiSyncClient::NotiSyncClient()
 {
     isRun = false;
+    time(&lastUpdate);
 }
 
 void* NotiSyncClient::fetchPhoneDetail()
@@ -75,7 +76,7 @@ fromStrToQStringList(const string& str)
 void* NotiSyncClient::fetchNotifications()
 {
     string output;
-    NetworkUtils::get(url, uuid, getTime(), "Notifications", output);
+    NetworkUtils::get(url, uuid, to_string(lastUpdate), "Notifications", output);
     QJsonParseError jsonPareseError;
     QJsonDocument jsonDoc = QJsonDocument::fromJson(
         output.c_str(), &jsonPareseError); //字符串格式化为JSON
@@ -105,6 +106,9 @@ void* NotiSyncClient::fetchNotifications()
                     n.packageName = o.value("PackageName").toString().toStdString();
                     n.title = o.value("Title").toString().toStdString();
                     n.content = o.value("Content").toString().toStdString();
+                    long tmpTime = stol(n.time);
+                    if (lastUpdate < tmpTime)
+                        lastUpdate = tmpTime;
                     notifications.push_back(move(n));
                 }
             }
